@@ -51,7 +51,8 @@ public class Tela5FXMLController extends InterfaceUsuario {
     private Button voltaTela2, salvaTela5;
     
     ObservableList<String> listaDisciplinas = FXCollections.observableArrayList("[1]ÉTICA EM INFORMÁTICA", "[1]MATEMÁTICA COMPUTACIONAL", "[1]ALGORITMOS E PROGRAMAÇÃO", "[1]ÁLGEBRA", "[1]INTRODUÇÃO AO CÁLCULO", "[1]INICIAÇÃO TÉCNICO-CIENTÍFICA", "[1]INTRODUÇÃO A ENGENHARIA DE COMPUTAÇÃO", "[1]INTRODUÇÃO À FÍSICA",
-    "[2]CÁLCULO", "[2]ALGORITMOS E PROGRAMAÇÃO", "[2]CIRCUITOS DIGITAIS", "[2]DESENHO TÉCNICO", "[2]FÍSICA GERAL", "[2]ÁLGEBRA"
+    "[2]CÁLCULO", "[2]ALGORITMOS E PROGRAMAÇÃO", "[2]CIRCUITOS DIGITAIS", "[2]DESENHO TÉCNICO", "[2]FÍSICA GERAL", "[2]ÁLGEBRA", "[3]CÁLCULO", "[3]ESTRUTURAS DE DADOS", "[3]PROGRAMAÇÃO ORIENTADA A OBJETOS", "[3]ARQUITETURA DE COMPUTADORES", "[3]FÍSICA", "[3]QUÍMICA",
+    "[4]ARQUITETURA DE COMPUTADORES", "[4]PROGRAMAÇÃO ORIENTADA A OBJETOS", "[4]CÁLCULO", "[4]ANÁLISE DE CIRCUITOS ELÉTRICOS", "[4]QUÍMICA", "[4]ÓTICA E FÍSICA PARA SEMICONDUTORES", "[4]RESISTÊNCIA DOS MATERIAIS"
     );
    
     ObservableList<String> listaMedias = FXCollections.observableArrayList("M1", "M2", "M3");
@@ -91,22 +92,29 @@ public class Tela5FXMLController extends InterfaceUsuario {
     
     @FXML
     private String pegaNomeProva() throws IOException{
-        if(campoNome.getText().equals("")){
+        String nomeProva = campoNome.getText();
+        if(nomeProva.equals("")){
             Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
             dialogoErro.setTitle("Erro");
             dialogoErro.setHeaderText("CAMPO PROVA VAZIO!!!");
             dialogoErro.setContentText("É necessário nomear a prova");
             dialogoErro.showAndWait();
             // Como parar aqui?
-        }
-        String nomeProva = campoNome.getText();
-        return nomeProva;
-            
+        }        
+        return nomeProva;            
     }
     
     @FXML
     private String pegaPeso() throws IOException{
         String pesoProva = campoPeso.getText();        
+        if(pesoProva.equals("")){
+            Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+            dialogoErro.setTitle("Erro");
+            dialogoErro.setHeaderText("CAMPO PESO VAZIO!!!");
+            dialogoErro.setContentText("É necessário definir o peso");
+            dialogoErro.showAndWait();
+            // Como parar aqui?
+        }
         //Double pesoProva = Double.parseDouble(campoPeso.getText());
         return pesoProva;
     }
@@ -114,7 +122,7 @@ public class Tela5FXMLController extends InterfaceUsuario {
     @FXML
     private String pegaDisciplina() throws IOException{
         String disc = campoDisciplina.getValue();
-        return disc;
+        return disc;        
     }
     
     @FXML
