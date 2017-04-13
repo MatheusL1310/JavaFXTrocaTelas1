@@ -27,7 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-//import javafxtrocatelas1.Prova;
+
 
 /**
  * FXML Controller class
@@ -46,33 +46,27 @@ public class Tela2FXMLController extends InterfaceUsuario {
     private Button informaNota, adicionaAvaliacao, voltaTela1;
     
     @FXML
-    private TableView<Prova> tabela;
+    private TableView<Avaliacao> tabela;
         
     @FXML
-    private TableColumn<Prova,String> colNome, colDisc, colMedia, colPeso, colNota;
+    private TableColumn<Avaliacao,String> colNome, colDisc, colMedia, colPeso, colNota;
     
     @FXML
     private AnchorPane elementoRaiz;
     
-    private List listaConteudoTabela = new ArrayList<Prova>();
       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            FileReader leitor = new FileReader(arquivo1);
-            BufferedReader leitorLin = new BufferedReader(leitor);
-            
-            while (leitorLin.ready()) {
-                String linha = leitorLin.readLine();
-                listaConteudoTabela = new Prova(linha); //PAREI AQUI!!!!!!!!!!
-            }
-             leitorLin.close();
-            leitor.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        // ObservableList conteudo = FXCollections.observableArrayList(listaConteudoTabela);   <- Inicio da insercao na tabela
-       // tabela.setItems(conteudo); 
+        ObservableList<Avaliacao> conteudo = FXCollections.observableArrayList();//Avaliacao.obterListaAvaliacoes()); TENTATIVA FALHOU
+        
+        /*ArrayList<Avaliacao> aval = Avaliacao.obterListaAvaliacoes(); //TENTATIVA FALHOU
+        for(int i = 0;i<aval.size();i++){
+            conteudo.add(aval.get(i));
+        }*/
+        
+        //conteudo.addAll(Avaliacao.obterListaAvaliacoes()); //TENTATIVA FALHOU
+        
+        tabela.setItems(conteudo); 
     }    
     
     
