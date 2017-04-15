@@ -46,57 +46,43 @@ public class Tela4FXMLController extends InterfaceUsuario {
     @FXML
     private Button voltaTela2, salvaTela4;
     
-        
+    protected Avaliacao a1 = Avaliacao.obterListaAvaliacoes().get(GerenciadorJanela.identificador);    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        label1.setText("Nome: "+a1.getNome());
+        label2.setText("Disciplina: "+a1.getDisciplina());
+        label3.setText("Media: "+String.valueOf(a1.getMedia()));
     }    
     
     @FXML 
     public void voltarParaTela2() throws IOException {
         
         GerenciadorJanela.obterInstancia().voltar();
-
-      /*  //carrega o elemento raiz do FXML da tela que será aberta
-        AnchorPane elementoRaizFXML2 = FXMLLoader.load(getClass().getResource("Tela2FXML.fxml"));
-        
-        //cria uma nova cena, passando para o construtor o elemento raiz do FXML que será aberto
-        Scene novaCena = new Scene(elementoRaizFXML2);
-        
-        //obtém a cena a partir do elemenento raiz da tela que está aberta (tela atual)
-        Scene cenaAtual = elementoRaiz.getScene();
-        
-        //obtém o palco da aplicação a partir da cena atual (com cast para Stage)
-        Stage palcoDaAplicacao = (Stage) cenaAtual.getWindow();
-        
-        //atribuindo a nova cena, criada no início do método, ao palco da aplicação
-        palcoDaAplicacao.setScene(novaCena);
-        
-        palcoDaAplicacao.setTitle("Minhas avaliacoes");  */
     }
     
     @FXML
-    private String pegaNota() throws IOException{
-        String nota = campoNota.getText();
-        //Double nota = Double.parseDouble(campoNota.getText());  
-        return nota;
+    private boolean validaNota() throws IOException{
+        if("".equals(campoNota.getText())){
+            Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+            dialogoErro.setTitle("Erro");
+            dialogoErro.setHeaderText("CAMPO NOTA VAZIO!!!");
+            dialogoErro.setContentText("É necessário inserir a nota");
+            dialogoErro.showAndWait();
+            return false;
+        }
+        return true;
     }
     
-    //Modificar para gravar a nota no final da linha
+    
     @FXML
     private void salvarNota() throws IOException{
-        if(!arquivo1.exists()){
-            arquivo1.createNewFile();
+        if(validaNota()){
+            
+            a1.setNota(Double.parseDouble(campoNota.getText()));
+            
+            a1.atualizar();
         }
-        FileWriter escritor = new FileWriter(arquivo1, true);
         
-        BufferedWriter gravador = new BufferedWriter(escritor);
-        
-        gravador.write(pegaNota());
-        
-        gravador.close();
-        escritor.close();
-        
-        voltarParaTela2();
     }
 }

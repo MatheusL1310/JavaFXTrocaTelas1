@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -49,7 +51,7 @@ public class Tela2FXMLController extends InterfaceUsuario {
     private TableView<Avaliacao> tabela;
         
     @FXML
-    private TableColumn<Avaliacao,String> colNome, colDisc, colMedia, colPeso, colNota;
+    private TableColumn colNome, colDisc, colMedia, colPeso, colNota;
     
     @FXML
     private AnchorPane elementoRaiz;
@@ -57,87 +59,52 @@ public class Tela2FXMLController extends InterfaceUsuario {
       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ObservableList<Avaliacao> conteudo = FXCollections.observableArrayList();//Avaliacao.obterListaAvaliacoes()); TENTATIVA FALHOU
-        
-        /*ArrayList<Avaliacao> aval = Avaliacao.obterListaAvaliacoes(); //TENTATIVA FALHOU
-        for(int i = 0;i<aval.size();i++){
-            conteudo.add(aval.get(i));
-        }*/
-        
-        //conteudo.addAll(Avaliacao.obterListaAvaliacoes()); //TENTATIVA FALHOU
-        
+        ObservableList<Avaliacao> conteudo = FXCollections.observableArrayList(Avaliacao.obterListaAvaliacoes());              
         tabela.setItems(conteudo); 
+        
+        colNome.setCellValueFactory(new PropertyValueFactory<Avaliacao, String>("nome"));
+        colDisc.setCellValueFactory(new PropertyValueFactory<Avaliacao, String>("disciplina"));
+        colMedia.setCellValueFactory(new PropertyValueFactory<Avaliacao, Character[]>("media"));
+        colPeso.setCellValueFactory(new PropertyValueFactory<Avaliacao, Double>("peso"));
+        colNota.setCellValueFactory(new PropertyValueFactory<Avaliacao, Double>("nota"));
+        
     }    
     
     
     @FXML
     public void irParaTela4() throws IOException {
+        if(tabela.getItems().isEmpty() == false){
+            if(Avaliacao.obterListaAvaliacoes().get(tabela.getSelectionModel().getSelectedItem().getIdentificadorNoArquivo()).getNota()!=null){
+                Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+                dialogoErro.setTitle("Erro");
+                dialogoErro.setHeaderText("NOTA JÁ EXISTE!!!");
+                dialogoErro.setContentText("Já existe nota cadastrada nesta prova");
+                dialogoErro.showAndWait();
+            }else{
+                GerenciadorJanela.setIdentificador(tabela.getSelectionModel().getSelectedItem().getIdentificadorNoArquivo());
+                Tela4FXMLController tela4 = new Tela4FXMLController();
+                GerenciadorJanela.obterInstancia().abreJanela(tela4);
+            }
+        }else{
+            Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+            dialogoErro.setTitle("Erro");
+            dialogoErro.setHeaderText("TABELA VAZIA!!!");
+            dialogoErro.setContentText("É necessário adicionar uma prova antes de adicionar a nota");
+            dialogoErro.showAndWait();
+        }
         
-        Tela4FXMLController tela4 = new Tela4FXMLController();
-        GerenciadorJanela.obterInstancia().abreJanela(tela4);   
-
-      /*  //carrega o elemento raiz do FXML da tela que será aberta
-        AnchorPane elementoRaizFXML4 = FXMLLoader.load(getClass().getResource("Tela4FXML.fxml"));
-        
-        //cria uma nova cena, passando para o construtor o elemento raiz do FXML que será aberto
-        Scene novaCena = new Scene(elementoRaizFXML4);
-        
-        //obtém a cena a partir do elemenento raiz da tela que está aberta (tela atual)
-        Scene cenaAtual = elementoRaiz.getScene();
-        
-        //obtém o palco da aplicação a partir da cena atual (com cast para Stage)
-        Stage palcoDaAplicacao = (Stage) cenaAtual.getWindow();
-        
-        //atribuindo a nova cena, criada no início do método, ao palco da aplicação
-        palcoDaAplicacao.setScene(novaCena);
-        
-        palcoDaAplicacao.setTitle("Informar nota");  */
     }
     
     @FXML
     public void irParaTela5() throws IOException {
         
         Tela5FXMLController tela5 = new Tela5FXMLController();
-        GerenciadorJanela.obterInstancia().abreJanela(tela5);
-
-      /*  //carrega o elemento raiz do FXML da tela que será aberta
-        AnchorPane elementoRaizFXML5 = FXMLLoader.load(getClass().getResource("Tela5FXML.fxml"));
-        
-        //cria uma nova cena, passando para o construtor o elemento raiz do FXML que será aberto
-        Scene novaCena = new Scene(elementoRaizFXML5);
-        
-        //obtém a cena a partir do elemenento raiz da tela que está aberta (tela atual)
-        Scene cenaAtual = elementoRaiz.getScene();
-        
-        //obtém o palco da aplicação a partir da cena atual (com cast para Stage)
-        Stage palcoDaAplicacao = (Stage) cenaAtual.getWindow();
-        
-        //atribuindo a nova cena, criada no início do método, ao palco da aplicação
-        palcoDaAplicacao.setScene(novaCena);
-        
-        palcoDaAplicacao.setTitle("Adicionar nova avaliacao");  */
+        GerenciadorJanela.obterInstancia().abreJanela(tela5);      
     }
     
     @FXML 
     public void voltarParaTela1() throws IOException {
         
         GerenciadorJanela.obterInstancia().voltar();
-
-      /*  //carrega o elemento raiz do FXML da tela que será aberta
-        AnchorPane elementoRaizFXML1 = FXMLLoader.load(getClass().getResource("Tela1FXML.fxml"));
-        
-        //cria uma nova cena, passando para o construtor o elemento raiz do FXML que será aberto
-        Scene novaCena = new Scene(elementoRaizFXML1);
-        
-        //obtém a cena a partir do elemenento raiz da tela que está aberta (tela atual)
-        Scene cenaAtual = elementoRaiz.getScene();
-        
-        //obtém o palco da aplicação a partir da cena atual (com cast para Stage)
-        Stage palcoDaAplicacao = (Stage) cenaAtual.getWindow();
-        
-        //atribuindo a nova cena, criada no início do método, ao palco da aplicação
-        palcoDaAplicacao.setScene(novaCena);
-        
-        palcoDaAplicacao.setTitle("Dashboard");  */
     }
 }

@@ -19,7 +19,7 @@ public abstract class InterfaceUsuario implements Initializable{
     private Scene minhaCena;
     private String caminhoFxml;
     
-    File arquivo1 = new File("ListaProvas.csv");
+   
     
     protected InterfaceUsuario(String caminhoFxml) {
         this.caminhoFxml = caminhoFxml;

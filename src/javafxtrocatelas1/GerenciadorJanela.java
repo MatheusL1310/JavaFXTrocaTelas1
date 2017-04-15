@@ -25,8 +25,17 @@ public class GerenciadorJanela {
     }
     
     private Stage palco;
-    private Stack<InterfaceUsuario> pilhaRetorno;
+    protected Stack<InterfaceUsuario> pilhaRetorno;
     private InterfaceUsuario janelaAtual;
+    public static int identificador;
+
+    public static int getIdentificador() {
+        return identificador;
+    }
+
+    public static void setIdentificador(int identificador) {
+        GerenciadorJanela.identificador = identificador;
+    }
     
     public void inicializaPalco(Stage p, InterfaceUsuario interfaceInicial){
         this.palco = p;
@@ -43,7 +52,7 @@ public class GerenciadorJanela {
         this.pilhaRetorno.push(this.janelaAtual);
         this.getPalco().setScene(novaJanela.obterCena());
         this.janelaAtual = novaJanela;
-        System.out.println(this.pilhaRetorno.size());
+        //System.out.println(this.pilhaRetorno.size());
     }
     
     public void voltar() {
