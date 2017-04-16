@@ -4,6 +4,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -23,9 +24,10 @@
                </tickLabelFont></NumberAxis>
         </yAxis>
       </BarChart>
-      <Button fx:id="voltaTela1" layoutX="75.0" layoutY="651.0" mnemonicParsing="false" onAction="#voltarParaTela1" prefHeight="48.0" prefWidth="180.0" text="Voltar">
+      <Button fx:id="voltaTela1" layoutX="75.0" layoutY="651.0" mnemonicParsing="false" onAction="#onActionChoiceBox" prefHeight="48.0" prefWidth="180.0" text="Voltar">
          <font>
             <Font size="24.0" />
          </font></Button>
+      <ChoiceBox id="disciplina" fx:id="campoDisciplina" layoutX="431.0" layoutY="658.0" onKeyPressed="#onActionChoiceBox" prefHeight="36.0" prefWidth="425.0" />
    </children>
 </AnchorPane>

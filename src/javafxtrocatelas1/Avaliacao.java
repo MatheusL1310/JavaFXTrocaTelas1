@@ -74,6 +74,24 @@ public class Avaliacao{
        return listaConteudoTabela;
     }
     
+   
+    public static double calculaMediaDaDisciplina(String disciplina, char[] media){
+        ArrayList<Avaliacao> listaAvaliacoes = obterListaAvaliacoes();
+        Avaliacao a1 = new Avaliacao();
+        Double m = 0.0;
+        Double peso = 0.0;
+        for(int i = 0;i<listaAvaliacoes.size();i++){
+            a1 = listaAvaliacoes.get(i);
+            if(a1.disciplina.equals(disciplina) && Arrays.equals(a1.media, media)){
+                m += (a1.nota*a1.peso);
+                peso += a1.peso;
+            }            
+           
+        }
+        return m/peso;
+        
+    }
+    
     public String getNome() {
         return nome;
     }
