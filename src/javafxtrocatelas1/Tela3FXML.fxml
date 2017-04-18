@@ -12,7 +12,7 @@
    <children>
       <BarChart fx:id="tabela" layoutX="57.0" layoutY="21.0" legendSide="LEFT" legendVisible="false" prefHeight="620.0" prefWidth="928.0" title="Meu desempenho em cada disciplina e cada media.">
         <xAxis>
-          <CategoryAxis label="Materias" side="BOTTOM" fx:id="x">
+          <CategoryAxis label="Matérias" side="BOTTOM" fx:id="x">
                <tickLabelFont>
                   <Font size="14.0" />
                </tickLabelFont></CategoryAxis>
@@ -24,10 +24,10 @@
                </tickLabelFont></NumberAxis>
         </yAxis>
       </BarChart>
-      <Button fx:id="voltaTela1" layoutX="75.0" layoutY="651.0" mnemonicParsing="false" onAction="#onActionChoiceBox" prefHeight="48.0" prefWidth="180.0" text="Voltar">
+      <Button fx:id="voltaTela1" layoutX="75.0" layoutY="651.0" mnemonicParsing="false" onAction="#voltarParaTela1" prefHeight="48.0" prefWidth="180.0" text="Voltar">
          <font>
             <Font size="24.0" />
          </font></Button>
-      <ChoiceBox id="disciplina" fx:id="campoDisciplina" layoutX="431.0" layoutY="658.0" onKeyPressed="#onActionChoiceBox" prefHeight="36.0" prefWidth="425.0" />
+      <ChoiceBox id="disciplina" fx:id="campoDisciplina" layoutX="431.0" layoutY="658.0" onAction="#onActionChoiceBox" prefHeight="36.0" prefWidth="425.0" />
    </children>
 </AnchorPane>

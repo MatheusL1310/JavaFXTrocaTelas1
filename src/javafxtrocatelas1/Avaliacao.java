@@ -31,7 +31,9 @@ public class Avaliacao{
     private Double nota;
     private int identificadorNoArquivo;
 
-    
+    public String getMediaString() {
+        return String.valueOf(media);
+    }
     
     public Avaliacao(){
         

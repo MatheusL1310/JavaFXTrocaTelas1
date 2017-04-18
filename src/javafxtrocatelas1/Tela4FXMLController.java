@@ -71,6 +71,14 @@ public class Tela4FXMLController extends InterfaceUsuario {
             dialogoErro.showAndWait();
             return false;
         }
+        if(Double.parseDouble(campoNota.getText())< 0.0 || Double.parseDouble(campoNota.getText()) >= 10.0){
+            Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+            dialogoErro.setTitle("Erro");
+            dialogoErro.setHeaderText("NOTA INVALIDA!!!");
+            dialogoErro.setContentText("A nota tem que ser um numero de 0.0 a 10.0");
+            dialogoErro.showAndWait();
+            return false;
+        }
         return true;
     }
     

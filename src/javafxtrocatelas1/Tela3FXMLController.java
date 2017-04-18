@@ -67,31 +67,9 @@ public class Tela3FXMLController extends InterfaceUsuario {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        campoDisciplina.setValue("[10]SISTEMAS DISTRIBUÍDOS");
+        tabela.setAnimated(false);
+        campoDisciplina.setValue("[4]QUÍMICA");
         campoDisciplina.setItems(listaDisciplinas);
-        
-        
-        
-        double m1,m2,m3,mf;
-        
-        m1 = Avaliacao.calculaMediaDaDisciplina(campoDisciplina.getValue(), "M1".toCharArray());
-        m2 = Avaliacao.calculaMediaDaDisciplina(campoDisciplina.getValue(), "M2".toCharArray());
-        m3 = Avaliacao.calculaMediaDaDisciplina(campoDisciplina.getValue(), "M3".toCharArray());
-        
-        
-        XYChart.Series set1 = new   XYChart.Series<>();
-        
-        if(!Double.isNaN(m1))
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - M1", m1));
-        if(!Double.isNaN(m2))
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - M2", m2));
-        if(!Double.isNaN(m3))
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - M3", m3));
-        if(!Double.isNaN(m1) && !Double.isNaN(m2) && !Double.isNaN(m3)){
-            mf = (m1+m2+m3)/3;
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - MF", mf));
-        }
-        tabela.getData().addAll(set1);
         
     }    
     
@@ -107,15 +85,16 @@ public class Tela3FXMLController extends InterfaceUsuario {
         XYChart.Series set1 = new   XYChart.Series<>();
         
         if(!Double.isNaN(m1))
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - M1", m1));
+            set1.getData().add(new XYChart.Data("M1", m1));
         if(!Double.isNaN(m2))
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - M2", m2));
+            set1.getData().add(new XYChart.Data("M2", m2));
         if(!Double.isNaN(m3))
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - M3", m3));
+            set1.getData().add(new XYChart.Data("M3", m3));
         if(!Double.isNaN(m1) && !Double.isNaN(m2) && !Double.isNaN(m3)){
             mf = (m1+m2+m3)/3;
-            set1.getData().add(new XYChart.Data(campoDisciplina.getValue()+" - MF", mf));
+            set1.getData().add(new XYChart.Data("MF", mf));
         }
+        tabela.getData().clear();
         tabela.getData().addAll(set1);
     }
     

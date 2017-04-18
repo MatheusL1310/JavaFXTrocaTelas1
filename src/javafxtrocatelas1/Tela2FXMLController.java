@@ -64,7 +64,7 @@ public class Tela2FXMLController extends InterfaceUsuario {
         
         colNome.setCellValueFactory(new PropertyValueFactory<Avaliacao, String>("nome"));
         colDisc.setCellValueFactory(new PropertyValueFactory<Avaliacao, String>("disciplina"));
-        colMedia.setCellValueFactory(new PropertyValueFactory<Avaliacao, Character[]>("media"));
+        colMedia.setCellValueFactory(new PropertyValueFactory<Avaliacao, String>("mediaString"));
         colPeso.setCellValueFactory(new PropertyValueFactory<Avaliacao, Double>("peso"));
         colNota.setCellValueFactory(new PropertyValueFactory<Avaliacao, Double>("nota"));
         
