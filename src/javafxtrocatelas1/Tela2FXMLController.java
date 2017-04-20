@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -74,12 +75,30 @@ public class Tela2FXMLController extends InterfaceUsuario {
     @FXML
     public void irParaTela4() throws IOException {
         if(tabela.getItems().isEmpty() == false){
-            if(Avaliacao.obterListaAvaliacoes().get(tabela.getSelectionModel().getSelectedItem().getIdentificadorNoArquivo()).getNota()!=null){
+            if(tabela.getSelectionModel().equals(false)){
                 Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
                 dialogoErro.setTitle("Erro");
-                dialogoErro.setHeaderText("NOTA JÁ EXISTE!!!");
-                dialogoErro.setContentText("Já existe nota cadastrada nesta prova");
-                dialogoErro.showAndWait();
+                dialogoErro.setHeaderText("NENHUMA PROVA SELECIONADA!!!");
+                dialogoErro.setContentText("É necessário selecionar uma prova para adicionar a nota");
+                dialogoErro.showAndWait();        
+            }else if(Avaliacao.obterListaAvaliacoes().get(tabela.getSelectionModel().getSelectedItem().getIdentificadorNoArquivo()).getNota()!=null){
+                    Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+                    ButtonType btnSim = new ButtonType("Sim");
+                    ButtonType btnNao = new ButtonType("Não");
+                    dialogoErro.setTitle("Erro");
+                    dialogoErro.setHeaderText("NOTA JÁ EXISTE!!!");
+                    dialogoErro.setContentText("Já existe nota cadastrada nesta prova. Deseja alterar a nota?");
+                    dialogoErro.getButtonTypes().setAll(btnSim, btnNao);
+                    dialogoErro.showAndWait().ifPresent(b -> {
+                        if (b == btnSim) {
+                            GerenciadorJanela.setIdentificador(tabela.getSelectionModel().getSelectedItem().getIdentificadorNoArquivo());
+                            Tela4FXMLController tela4 = new Tela4FXMLController();
+                            GerenciadorJanela.obterInstancia().abreJanela(tela4);
+                        }else if (b == btnNao) {
+                            dialogoErro.close();
+                        }
+
+                    });
             }else{
                 GerenciadorJanela.setIdentificador(tabela.getSelectionModel().getSelectedItem().getIdentificadorNoArquivo());
                 Tela4FXMLController tela4 = new Tela4FXMLController();

@@ -109,9 +109,30 @@ public class Tela5FXMLController extends InterfaceUsuario {
             dialogoErro.setContentText("É necessário dar peso à prova");
             dialogoErro.showAndWait();
             return false;
+        }else{
+            try {
+                Double d = Double.parseDouble(campoPeso.getText());
+                if(d<=0.0){
+                    Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+                    dialogoErro.setTitle("Erro");
+                    dialogoErro.setHeaderText("PESO INVALIDO!!!");
+                    dialogoErro.setContentText("O peso tem que ser um valor positivo");
+                    dialogoErro.showAndWait();
+                    return false;
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
+                dialogoErro.setTitle("Erro");
+                dialogoErro.setHeaderText("PESO INVALIDO!!!");
+                dialogoErro.setContentText("O peso tem que ser um numero positivo");
+                dialogoErro.showAndWait();                
+                return false;
+            }  
+            
         }
         return true;            
-    } 
+    }
     
     @FXML
     private void salvarProva() throws IOException{   

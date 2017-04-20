@@ -168,7 +168,7 @@ public class Avaliacao{
         Path path = Paths.get("ListaProvas.csv");
         List<String> linhas = Files.readAllLines(path);
 
-        String novoConteudo = linhas.get(identificadorNoArquivo).substring(0, linhas.get(identificadorNoArquivo).length()) +","+getNota();
+        String novoConteudo = getDisciplina()+","+getMediaString()+","+getNome()+","+getPeso()+","+getNota();
         linhas.remove(identificadorNoArquivo);
         linhas.add(identificadorNoArquivo, novoConteudo);
 
