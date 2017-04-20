@@ -75,7 +75,7 @@ public class Tela2FXMLController extends InterfaceUsuario {
     @FXML
     public void irParaTela4() throws IOException {
         if(tabela.getItems().isEmpty() == false){
-            if(tabela.getSelectionModel().equals(false)){
+            if(tabela.getSelectionModel().getSelectedItem() == null){
                 Alert dialogoErro = new Alert(Alert.AlertType.ERROR);
                 dialogoErro.setTitle("Erro");
                 dialogoErro.setHeaderText("NENHUMA PROVA SELECIONADA!!!");
